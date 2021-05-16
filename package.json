@@ -1,0 +1,35 @@
+{
+  "name": "shopping-list",
+  "version": "1.0.0",
+  "description": "Shopping list desktop app with electron js",
+  "main": "index.js",
+  "win": {
+    "target": "NSIS"
+ },
+  "scripts": {
+    "start": "electron .",
+    "pack":"electron-packager .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pack1": "electron-builder --dir",
+    "dist1": "electron-builder"
+  },
+  "build": {
+    "appId": "naveenkumarmd",
+    "mac": {
+      "category": "your.app.category.type"
+    }
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+
+   
+ 
+   
+    "sqlite3": "^5.0.2"
+   
+  },
+  "devDependencies": {
+    "electron-packager": "^15.2.0"
+  }
+}

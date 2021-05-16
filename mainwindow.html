@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Shopping list</title>
+    <script src="./main.js"></script>
+    <style>
+        .card {
+            padding: 20px;
+            max-width: 700px;
+            margin: 10px auto;
+            z-index: 1;
+        }
+
+        .cont {
+            top: 200px;
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+</head>
+
+<body>
+    <h1>CRUD application</h1>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+                role="tab" aria-controls="home" aria-selected="true">Create</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+                role="tab" aria-controls="profile" aria-selected="false">Read</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#messages" type="button"
+                role="tab" aria-controls="messages" aria-selected="false">Update</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="settings-tab" data-bs-toggle="tab" data-bs-target="#settings" type="button"
+                role="tab" aria-controls="settings" aria-selected="false">Delete</button>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div style="height: 50px;"></div>
+            <div class="container cont">
+                <div class="card">
+                    <div style="padding: 5px;"></div>
+                    <div id="message-create"></div>
+                    <h2 style="padding-bottom: 20px;">Create your Blogs</h2>
+                    <div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Author name</label>
+                            <input type="text" class="form-control" id="author_name">
+                            <div id="emailHelp" class="form-text">Your name will be visible to the blog vistors</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Topic</label>
+                            <input type="text" class="form-control" id="Topic">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Topic id(Must be unique)</label>
+                            <input type="text" class="form-control" id="Topic_id">
+                            <div id="emailHelp" class="form-text"><span style="color: dodgerblue; cursor: pointer;"
+                                    onclick="uniqueid()">Click here </span>to create a unique id</div>
+                        </div>
+                        <div class=" mb-3">
+                            <label for="exampleFormControlTextarea1">Content</label>
+                            <textarea type="text" class="form-control" id="content"></textarea>
+                        </div>
+
+                        <button class="btn btn-primary" onclick="hanldecreatesubmit()">Submit</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div style="height: 50px;"></div>
+            <div class="container cont">
+                <div class="card">
+                    <div>
+                        <h2>Search for Blogs</h2>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Search</label>
+                            <input type="text" class="form-control" id="searchkey" aria-describedby="emailHelp">
+                            <div id="emailHelp" class="form-text">Search by topic name or topic id</div>
+                        </div>
+                        <button class="btn btn-primary" onclick="handleread()">Submit</button>
+                    </div>
+                </div>
+            </div>
+            <div class="container cont">
+                <div class="card">
+                    <div>
+                        <h3>Results</h3>
+                        <div>
+                            <ol id="resultview">
+
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">
+            <div style="height: 50px;"></div>
+            <div class="container cont">
+                <div class="card">
+                    <div style="padding: 5px;"></div>
+                    <div id="message-update"></div>
+                    <h2>Update content of Blog</h2>
+                    <div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Topic id</label>
+                            <input type="email" class="form-control" id="topicid-update"
+                                aria-describedby="emailHelp">
+                            <div id="emailHelp" class="form-text">Enter the topic id so that it would be easy to
+                                reference</div>
+                        </div>
+                        <div class=" mb-3">
+                            <label for="exampleFormControlTextarea1">Content</label>
+                            <textarea type="text" class="form-control" id="content-update"></textarea>
+                        </div>
+                        <button onclick="hanldeupdatecontent()" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+            <div style="height: 50px;"></div>
+            <div class="container cont">
+                <div class="card">
+                    <h2>Delete a blog</h2>
+                    <div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Topic id</label>
+                            <input type="email" class="form-control" id="blogtobedeleted" aria-describedby="emailHelp">
+                            <div id="emailHelp" class="form-text">Enter the topic id you wish to delete</div>
+                        </div>
+
+                        <button class="btn btn-primary" onclick="deleteblog()">Submit</button>
+                        <div style="padding: 5px;"></div>
+                        <div id="message"></div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
